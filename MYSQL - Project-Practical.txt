@@ -1,0 +1,680 @@
+
+Setting environment for using XAMPP for Windows.
+user@DESKTOP-M9VCANA c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sql_practice       |
+| test               |
++--------------------+
+6 rows in set (0.024 sec)
+
+MariaDB [(none)]> show tables;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use sql_practice;
+Database changed
+MariaDB [sql_practice]> show tables;
++------------------------+
+| Tables_in_sql_practice |
++------------------------+
+| student                |
++------------------------+
+1 row in set (0.004 sec)
+
+MariaDB [sql_practice]> describe student;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| Student_ID      | int(11)     | YES  |     | NULL    |       |
+| First_Name      | varchar(50) | YES  |     | NULL    |       |
+| Last_Name       | varchar(50) | YES  |     | NULL    |       |
+| GPA             | float       | YES  |     | NULL    |       |
+| Enrollment_Date | datetime    | YES  |     | NULL    |       |
+| Major           | varchar(50) | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+6 rows in set (0.036 sec)
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
++------------+------------+-----------+------+---------------------+------------------+
+3 rows in set (0.018 sec)
+
+MariaDB [sql_practice]> update student set GPA=5.60 where Student_Id=203;
+Query OK, 0 rows affected (0.022 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
++------------+------------+-----------+------+---------------------+------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> update student set GPA=5.66 where student_id=203;
+Query OK, 1 row affected (0.016 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     | 5.66 | 2021-09-01 10:00:00 | Biology          |
++------------+------------+-----------+------+---------------------+------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> update student set GPA=5.60 where student_id=203;
+Query OK, 1 row affected (0.006 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
++------------+------------+-----------+------+---------------------+------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> insert into student values
+    -> (204, 'Radha', 'Sharma', 9.20, '2021-09-01 12:45:00', 'Chemistry'),
+    -> (205, 'Kush', 'Kumar', 7.85, '2021-09-01 08:30:00', 'Physics'),
+    -> (206, 'Prem', 'Chopra', 9.56, '2021-09-01 09:24:00', 'History'),
+    -> (207, 'Pankaj', 'Vats', 9.78, '2021-09-01 02:30:00', 'English'),
+    -> (208, 'Navleen', 'Kaur', 7.00, '2021-09-01 06:30:00', 'Mathematics');
+Query OK, 5 rows affected (0.015 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry        |
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics          |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English          |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics      |
++------------+------------+-----------+------+---------------------+------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> create table program(Student_Ref_Id int, Program_Name varchar(50), Program_Start_Date datetime);
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [sql_practice]> insert into program values
+    -> (201, 'Computer Science', '2021-09-01 00:00:00'),
+    -> (202, 'Mathematics', '2021-09-01 00:00:00'),
+    -> (208, 'Mathematics', '2021-09-01 00:00:00'),
+    -> (205, 'Physics', '2021-09-01 00:00:00'),
+    -> (204, 'Chemistry', '2021-09-01 00:00:00'),
+    -> (207, 'Psychology', '2021-09-01 00:00:00'),
+    -> (206, 'History', '2021-09-01 00:00:00'),
+    -> (203, 'Biology', '2021-09-01 00:00:00');
+Query OK, 8 rows affected (0.014 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+MariaDB [sql_practice]> select * from studentl
+    -> ;
+ERROR 1146 (42S02): Table 'sql_practice.studentl' doesn't exist
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry        |
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics          |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English          |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics      |
++------------+------------+-----------+------+---------------------+------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> select * from program;
++----------------+------------------+---------------------+
+| Student_Ref_Id | Program_Name     | Program_Start_Date  |
++----------------+------------------+---------------------+
+|            201 | Computer Science | 2021-09-01 00:00:00 |
+|            202 | Mathematics      | 2021-09-01 00:00:00 |
+|            208 | Mathematics      | 2021-09-01 00:00:00 |
+|            205 | Physics          | 2021-09-01 00:00:00 |
+|            204 | Chemistry        | 2021-09-01 00:00:00 |
+|            207 | Psychology       | 2021-09-01 00:00:00 |
+|            206 | History          | 2021-09-01 00:00:00 |
+|            203 | Biology          | 2021-09-01 00:00:00 |
++----------------+------------------+---------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> create table scholarship(Student_Ref_Id int, Scholarship Amount bigint, Scholarship_Date datetime);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'bigint, Scholarship_Date datetime)' at line 1
+MariaDB [sql_practice]> create table scholarship(Student_Ref_Id int, Scholarship_Amount bigint, Scholarship_Date datetime);
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [sql_practice]> describe scholarship;
++--------------------+------------+------+-----+---------+-------+
+| Field              | Type       | Null | Key | Default | Extra |
++--------------------+------------+------+-----+---------+-------+
+| Student_Ref_Id     | int(11)    | YES  |     | NULL    |       |
+| Scholarship_Amount | bigint(20) | YES  |     | NULL    |       |
+| Scholarship_Date   | datetime   | YES  |     | NULL    |       |
++--------------------+------------+------+-----+---------+-------+
+3 rows in set (0.019 sec)
+
+MariaDB [sql_practice]> insert into scholarship values
+    -> (201, 5000, '2021-10-15 00:00:00'),
+    -> (202, 4500, '2022-08-18 00:00:00'),
+    -> (203, 3000, '2022-01-25 00:00:00'),
+    -> (201, 4000, '2021-10-15 00:00:00');
+Query OK, 4 rows affected (0.007 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [sql_practice]> select * from scholarship;
++----------------+--------------------+---------------------+
+| Student_Ref_Id | Scholarship_Amount | Scholarship_Date    |
++----------------+--------------------+---------------------+
+|            201 |               5000 | 2021-10-15 00:00:00 |
+|            202 |               4500 | 2022-08-18 00:00:00 |
+|            203 |               3000 | 2022-01-25 00:00:00 |
+|            201 |               4000 | 2021-10-15 00:00:00 |
++----------------+--------------------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [sql_practice]> select * from student;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry        |
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics          |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English          |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics      |
++------------+------------+-----------+------+---------------------+------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> select * from program;
++----------------+------------------+---------------------+
+| Student_Ref_Id | Program_Name     | Program_Start_Date  |
++----------------+------------------+---------------------+
+|            201 | Computer Science | 2021-09-01 00:00:00 |
+|            202 | Mathematics      | 2021-09-01 00:00:00 |
+|            208 | Mathematics      | 2021-09-01 00:00:00 |
+|            205 | Physics          | 2021-09-01 00:00:00 |
+|            204 | Chemistry        | 2021-09-01 00:00:00 |
+|            207 | Psychology       | 2021-09-01 00:00:00 |
+|            206 | History          | 2021-09-01 00:00:00 |
+|            203 | Biology          | 2021-09-01 00:00:00 |
++----------------+------------------+---------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> --Write a SQL query to fetch "FIRST_NAME" from the Student table in upper case and use ALIAS name as STUDENT_NAME.
+MariaDB [sql_practice]> --QUE 1 : Write a SQL query to fetch "FIRST_NAME" from the Student table in upper case and use ALIAS name as STUDENT_NAME.
+MariaDB [sql_practice]>
+MariaDB [sql_practice]> select upper(First_Name) from student;
++-------------------+
+| upper(First_Name) |
++-------------------+
+| SHIVANSH          |
+| UMESH             |
+| RAKESH            |
+| RADHA             |
+| KUSH              |
+| PREM              |
+| PANKAJ            |
+| NAVLEEN           |
++-------------------+
+8 rows in set (0.010 sec)
+
+MariaDB [sql_practice]> select upper(First_Name) as Student_Name from student;
++--------------+
+| Student_Name |
++--------------+
+| SHIVANSH     |
+| UMESH        |
+| RAKESH       |
+| RADHA        |
+| KUSH         |
+| PREM         |
+| PANKAJ       |
+| NAVLEEN      |
++--------------+
+8 rows in set (0.004 sec)
+
+MariaDB [sql_practice]> --QUE 2 : Write a SQL query to fetch unique values of MAJOR Subjects from Student table.
+MariaDB [sql_practice]> select distinct major from student;
++------------------+
+| major            |
++------------------+
+| Computer Science |
+| Mathematics      |
+| Biology          |
+| Chemistry        |
+| Physics          |
+| History          |
+| English          |
++------------------+
+7 rows in set (0.008 sec)
+
+MariaDB [sql_practice]> -- QUE 3 : Write a SQL query to print the first 3 characters of FIRST_NAME from Student table.
+MariaDB [sql_practice]> select substring(First_Name, 1, 3) from student;
++-----------------------------+
+| substring(First_Name, 1, 3) |
++-----------------------------+
+| Shi                         |
+| Ume                         |
+| Rak                         |
+| Rad                         |
+| Kus                         |
+| Pre                         |
+| Pan                         |
+| Nav                         |
++-----------------------------+
+8 rows in set (0.006 sec)
+
+MariaDB [sql_practice]> select upper substring(First_Name, 1, 3) from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'substring(First_Name, 1, 3) from student' at line 1
+MariaDB [sql_practice]> select substring(First_Name, 1, 3) from student;
++-----------------------------+
+| substring(First_Name, 1, 3) |
++-----------------------------+
+| Shi                         |
+| Ume                         |
+| Rak                         |
+| Rad                         |
+| Kus                         |
+| Pre                         |
+| Pan                         |
+| Nav                         |
++-----------------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 4 : Write a SQL query to find the position of alphabet ('a') int the first name column 'Shivansh' from Student table.
+MariaDB [sql_practice]> select instr(First_Name, 'a') from student where First_Name="Shivansh";
++------------------------+
+| instr(First_Name, 'a') |
++------------------------+
+|                      5 |
++------------------------+
+1 row in set (0.008 sec)
+
+MariaDB [sql_practice]> -- QUE 5 : Write a SQL query that fetches the unique values of MAJOR Subjects from Student table and print its length.
+MariaDB [sql_practice]> select distinct(major), length(major) from student;
++------------------+---------------+
+| major            | length(major) |
++------------------+---------------+
+| Computer Science |            16 |
+| Mathematics      |            11 |
+| Biology          |             7 |
+| Chemistry        |             9 |
+| Physics          |             7 |
+| History          |             7 |
+| English          |             7 |
++------------------+---------------+
+7 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 6 : Write a SQL query to print FIRST_NAME from the Student table after replacing 'a' with 'A'.
+MariaDB [sql_practice]> select replace(First_Name, 'a', 'A') from student;
++-------------------------------+
+| replace(First_Name, 'a', 'A') |
++-------------------------------+
+| ShivAnsh                      |
+| Umesh                         |
+| RAkesh                        |
+| RAdhA                         |
+| Kush                          |
+| Prem                          |
+| PAnkAj                        |
+| NAvleen                       |
++-------------------------------+
+8 rows in set (0.005 sec)
+
+MariaDB [sql_practice]> -- QUE 7 : Write a SQL query to print the FIRST_NAME and LAST_NAME from Student table into single column COMPLETE_NAME.
+MariaDB [sql_practice]> select concat()
+    -> select concat('First_Name', 'Last_Name') as COMPLETE_NAME from student;
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'concat'
+MariaDB [sql_practice]> select concat('First_Name', 'Last_Name') as COMPLETE_NAME from student;
++---------------------+
+| COMPLETE_NAME       |
++---------------------+
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
+| First_NameLast_Name |
++---------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> select concat(First_Name, Last_Name) as COMPLETE_NAME from student;
++-----------------+
+| COMPLETE_NAME   |
++-----------------+
+| ShivanshMahajan |
+| UmeshSharma     |
+| RakeshKumar     |
+| RadhaSharma     |
+| KushKumar       |
+| PremChopra      |
+| PankajVats      |
+| NavleenKaur     |
++-----------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> select concat(First_Name," ", Last_Name) as COMPLETE_NAME from student;
++------------------+
+| COMPLETE_NAME    |
++------------------+
+| Shivansh Mahajan |
+| Umesh Sharma     |
+| Rakesh Kumar     |
+| Radha Sharma     |
+| Kush Kumar       |
+| Prem Chopra      |
+| Pankaj Vats      |
+| Navleen Kaur     |
++------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 8 : Write a SQL query to print all Student details from Student table order by FIRST_NAME Ascending and MAJOR Subject descending .
+MariaDB [sql_practice]> select * from student order by First_Name, major desc;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics          |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics      |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English          |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry        |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics      |
++------------+------------+-----------+------+---------------------+------------------+
+8 rows in set (0.006 sec)
+
+MariaDB [sql_practice]> -- QUE 9 : Write a SQL query to print details of the Students with the FIRST_NAME as 'Prem' and 'Shivansh' from Student table.
+MariaDB [sql_practice]> select * from student where First_Name="Prem" and  First_Name="Shivansh";
+Empty set (0.008 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name="Prem" or  First_Name="Shivansh";
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
++------------+------------+-----------+------+---------------------+------------------+
+2 rows in set (0.004 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name in('Prem', 'Shivansh');
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History          |
++------------+------------+-----------+------+---------------------+------------------+
+2 rows in set (0.003 sec)
+
+MariaDB [sql_practice]> -- QUE 10 : Write a SQL query to print details of the Students excluding FIRST_NAME as 'Prem' and 'Shivansh' from Student table.
+MariaDB [sql_practice]> select * from student where first_name not in('Prem', 'Shivansh');
++------------+------------+-----------+------+---------------------+-------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major       |
++------------+------------+-----------+------+---------------------+-------------+
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology     |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry   |
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics     |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English     |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics |
++------------+------------+-----------+------+---------------------+-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 11 : Write a SQL query to print details of the Students whose FIRST_NAME ends with 'a'.
+MariaDB [sql_practice]> select * from student where like "%a";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like "%a"' at line 1
+MariaDB [sql_practice]> select * from student where like '%a';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '%a'' at line 1
+MariaDB [sql_practice]> select * from student where First_Name like '%a';
++------------+------------+-----------+------+---------------------+-----------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major     |
++------------+------------+-----------+------+---------------------+-----------+
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry |
++------------+------------+-----------+------+---------------------+-----------+
+1 row in set (0.005 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name like 'a%';
+Empty set (0.002 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name like '%a';
++------------+------------+-----------+------+---------------------+-----------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major     |
++------------+------------+-----------+------+---------------------+-----------+
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry |
++------------+------------+-----------+------+---------------------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 12 : Write an SQL query to print details of the Students whose FIRST_NAME ends with ‘a’ and contains six alphabets.
+MariaDB [sql_practice]> select * from student where First_Name like '_____%a';
+Empty set (0.001 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name like '____%a';
++------------+------------+-----------+------+---------------------+-----------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major     |
++------------+------------+-----------+------+---------------------+-----------+
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry |
++------------+------------+-----------+------+---------------------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [sql_practice]> select * from student where First_Name like '_____%a';
+Empty set (0.001 sec)
+
+MariaDB [sql_practice]> --QUE 13 : Write an SQL query to print details of the Students whose GPA lies between 9.00 and 9.99.
+MariaDB [sql_practice]> select * from student where GPA between 9.00 and 9.99;
++------------+------------+-----------+------+---------------------+-----------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major     |
++------------+------------+-----------+------+---------------------+-----------+
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History   |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English   |
++------------+------------+-----------+------+---------------------+-----------+
+3 rows in set (0.007 sec)
+
+MariaDB [sql_practice]> --  QUE 14 : Write an SQL query to fetch the count of Students having Major Subject ‘Computer Science’.
+MariaDB [sql_practice]> select * count from student where major="Computer Science";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'count from student where major="Computer Science"' at line 1
+MariaDB [sql_practice]> select count from student where major="Computer Science";
+ERROR 1054 (42S22): Unknown column 'count' in 'field list'
+MariaDB [sql_practice]> select count(*) from student where major="Computer Science";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.006 sec)
+
+MariaDB [sql_practice]> select major, count(*) as Total_Count from student where major="Computer Science";
++------------------+-------------+
+| major            | Total_Count |
++------------------+-------------+
+| Computer Science |           1 |
++------------------+-------------+
+1 row in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 15 : Write an SQL query to fetch Students full names with GPA >= 8.5 and <= 9.5.
+MariaDB [sql_practice]> select concat(First_Name, " " ,Last_name) as Full_Name from student where GPA >=8.5 and GPA <=9.5;
++------------------+
+| Full_Name        |
++------------------+
+| Shivansh Mahajan |
+| Radha Sharma     |
++------------------+
+2 rows in set (0.004 sec)
+
+MariaDB [sql_practice]> -- QUE 16 : Write an SQL query to fetch the no. of Students for each MAJOR subject in the descending order.
+MariaDB [sql_practice]> select major, count(major) from student group by major order by count(major) desc;
++------------------+--------------+
+| major            | count(major) |
++------------------+--------------+
+| Mathematics      |            2 |
+| Computer Science |            1 |
+| English          |            1 |
+| History          |            1 |
+| Physics          |            1 |
+| Chemistry        |            1 |
+| Biology          |            1 |
++------------------+--------------+
+7 rows in set (0.012 sec)
+
+MariaDB [sql_practice]> -- QUE 17 : Display the details of students who have received scholarships, including their names, scholarship amounts, and scholarship dates.
+MariaDB [sql_practice]> select
+    -> student.First_Name
+    -> student.Last_Name,
+    -> scholarship.Scholarship_Amount,
+    -> scholarship.Scholarship_Date,
+    -> from student
+    -> INNER JOIN
+    -> Scholarship on student.Student_Id = Scholarship_Ref_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.Last_Name,
+scholarship.Scholarship_Amount,
+scholarship.Scholarship_Date,
+fro...' at line 3
+MariaDB [sql_practice]> select
+    -> student.First_Name,
+    -> student.Last_Name,
+    -> scholarship.Scholarship_Amount,
+    -> scholarship.Scholarship_Date,
+    -> from student
+    -> INNER JOIN
+    -> Scholarship on student.Student_Id = Scholarship_Ref_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from student
+INNER JOIN
+Scholarship on student.Student_Id = Scholarship_Ref_Id' at line 6
+MariaDB [sql_practice]> select
+    -> student.First_Name,
+    -> student.Last_Name,
+    -> scholarship.Scholarship_Amount,
+    -> scholarship.Scholarship_Date,
+    -> from student
+    -> INNER JOIN
+    -> Scholarship on student.Student_Id = Student_Ref_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from student
+INNER JOIN
+Scholarship on student.Student_Id = Student_Ref_Id' at line 6
+MariaDB [sql_practice]> select student.First_Name, student.Last_Name, scholarship.Scholarship.Amount, scholarship.Scholarship_Date from student
+    -> INNER JOIN
+    -> scholarship on student.Student_Id = Student_Ref_Id;
+ERROR 1054 (42S22): Unknown column 'scholarship.Scholarship.Amount' in 'field list'
+MariaDB [sql_practice]> select student.First_Name, student.Last_Name, scholarship.Scholarship.Amount, scholarship.Scholarship_Date from student
+    -> INNER JOIN
+    -> Scholarship on student.Student_Id = scholarship.Student_Ref_Id;
+ERROR 1054 (42S22): Unknown column 'scholarship.Scholarship.Amount' in 'field list'
+MariaDB [sql_practice]> SELECT
+    ->     Student.FIRST_NAME,
+    ->     Student.LAST_NAME,
+    ->     Scholarship.SCHOLARSHIP_AMOUNT,
+    ->     Scholarship.SCHOLARSHIP_DATE
+    -> FROM
+    ->     Student
+    -> INNER JOIN
+    ->     Scholarship ON Student.STUDENT_ID = Scholarship.STUDENT_REF_ID;
++------------+-----------+--------------------+---------------------+
+| FIRST_NAME | LAST_NAME | SCHOLARSHIP_AMOUNT | SCHOLARSHIP_DATE    |
++------------+-----------+--------------------+---------------------+
+| Shivansh   | Mahajan   |               5000 | 2021-10-15 00:00:00 |
+| Shivansh   | Mahajan   |               4000 | 2021-10-15 00:00:00 |
+| Umesh      | Sharma    |               4500 | 2022-08-18 00:00:00 |
+| Rakesh     | Kumar     |               3000 | 2022-01-25 00:00:00 |
++------------+-----------+--------------------+---------------------+
+4 rows in set (0.006 sec)
+
+MariaDB [sql_practice]> select Student.First_Name, Student.Last_Name, Scholarship.Scholarship_Amount, Scholarship.Scholarship_Date from student INNER JOIN Scholarship on Student.Student_Id = Scholarship.Student_Ref_Id;
++------------+-----------+--------------------+---------------------+
+| First_Name | Last_Name | Scholarship_Amount | Scholarship_Date    |
++------------+-----------+--------------------+---------------------+
+| Shivansh   | Mahajan   |               5000 | 2021-10-15 00:00:00 |
+| Shivansh   | Mahajan   |               4000 | 2021-10-15 00:00:00 |
+| Umesh      | Sharma    |               4500 | 2022-08-18 00:00:00 |
+| Rakesh     | Kumar     |               3000 | 2022-01-25 00:00:00 |
++------------+-----------+--------------------+---------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 18 : Write an SQL query to show only odd rows from Student table.
+MariaDB [sql_practice]> select * from student where Student_Id % 2 !=0;
++------------+------------+-----------+------+---------------------+------------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major            |
++------------+------------+-----------+------+---------------------+------------------+
+|        201 | Shivansh   | Mahajan   | 8.79 | 2021-09-01 09:30:00 | Computer Science |
+|        203 | Rakesh     | Kumar     |  5.6 | 2021-09-01 10:00:00 | Biology          |
+|        205 | Kush       | Kumar     | 7.85 | 2021-09-01 08:30:00 | Physics          |
+|        207 | Pankaj     | Vats      | 9.78 | 2021-09-01 02:30:00 | English          |
++------------+------------+-----------+------+---------------------+------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [sql_practice]> -- QUE 19 : Write an SQL query to show only even rows from Student table.
+MariaDB [sql_practice]> SELECT * FROM Student WHERE student_id % 2 = 0;
++------------+------------+-----------+------+---------------------+-------------+
+| Student_ID | First_Name | Last_Name | GPA  | Enrollment_Date     | Major       |
++------------+------------+-----------+------+---------------------+-------------+
+|        202 | Umesh      | Sharma    | 8.44 | 2021-09-01 08:30:00 | Mathematics |
+|        204 | Radha      | Sharma    |  9.2 | 2021-09-01 12:45:00 | Chemistry   |
+|        206 | Prem       | Chopra    | 9.56 | 2021-09-01 09:24:00 | History     |
+|        208 | Navleen    | Kaur      |    7 | 2021-09-01 06:30:00 | Mathematics |
++------------+------------+-----------+------+---------------------+-------------+
+4 rows in set (0.002 sec)
+
+MariaDB [sql_practice]> -- QUE 20 : List all students and their scholarship amounts if they have received any. If a student has not received a scholarship, display NULL for the scholarship details.
+MariaDB [sql_practice]> SELECT
+    ->     Student.FIRST_NAME,
+    ->     Student.LAST_NAME,
+    ->     Scholarship.SCHOLARSHIP_AMOUNT,
+    ->     Scholarship.SCHOLARSHIP_DATE
+    -> FROM
+    ->     Student
+    -> LEFT JOIN
+    ->     Scholarship ON Student.STUDENT_ID = Scholarship.STUDENT_REF_ID;
++------------+-----------+--------------------+---------------------+
+| FIRST_NAME | LAST_NAME | SCHOLARSHIP_AMOUNT | SCHOLARSHIP_DATE    |
++------------+-----------+--------------------+---------------------+
+| Shivansh   | Mahajan   |               5000 | 2021-10-15 00:00:00 |
+| Umesh      | Sharma    |               4500 | 2022-08-18 00:00:00 |
+| Rakesh     | Kumar     |               3000 | 2022-01-25 00:00:00 |
+| Shivansh   | Mahajan   |               4000 | 2021-10-15 00:00:00 |
+| Radha      | Sharma    |               NULL | NULL                |
+| Kush       | Kumar     |               NULL | NULL                |
+| Prem       | Chopra    |               NULL | NULL                |
+| Pankaj     | Vats      |               NULL | NULL                |
+| Navleen    | Kaur      |               NULL | NULL                |
++------------+-----------+--------------------+---------------------+
+9 rows in set (0.001 sec)
+
+MariaDB [sql_practice]>
